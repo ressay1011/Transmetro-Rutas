@@ -426,9 +426,9 @@ PARAMETROS = {
 # ---------------------------------------------------------------------------
 
 def a_minutos(texto):
-    """Convierte una hora escrita como '7', '7:05', '07:00' o '0700' a
-    minutos desde medianoche. Devuelve None si el formato no es valido."""
-    t = texto.strip().replace(".", "")
+    """Convierte una hora escrita como '7', '7:05', '7.05', '07:00' o '0700'
+    a minutos desde medianoche. Devuelve None si el formato no es valido."""
+    t = texto.strip().replace(".", ":")
     if ":" in t:
         partes = t.split(":")
         if len(partes) != 2 or not partes[0].isdigit() or not partes[1].isdigit():
@@ -518,7 +518,11 @@ def costo_tramo(clave_ruta, desde, hasta):
     costo = 0.0
     for k in range(i, j):
         a, b = paradas[k], paradas[k + 1]      # cada salto entre paradas
-        saltadas = distancia_fisica(a, b) - 1  # estaciones que se salta
+        distancia = distancia_fisica(a, b)
+        if distancia is None:
+            raise ValueError(f"la ruta {clave_ruta} une {a} y {b}, pero no "
+                             "hay un camino fisico entre ellas")
+        saltadas = distancia - 1               # estaciones que se salta
         costo += (saltadas + 1) * PARAMETROS["avance"]
         costo += PARAMETROS["parada"]          # esta parada si la paga
     return costo, (j - i)
@@ -601,6 +605,10 @@ def resolver_viaje(origen, destino, minuto):
                           "transbordo con la troncal.")
         estaciones_destino, alim_destino = info["estaciones"], destino[1]
 
+    if not disponibles:
+        return None, (f"a las {hhmm(minuto)} no hay servicio: el sistema "
+                      "opera aprox. de 05:00 a 22:00 en día laboral.")
+
     # --- combinar cada estacion posible de origen con cada una de destino ---
     candidatos = []
     for so in estaciones_origen:
@@ -612,9 +620,6 @@ def resolver_viaje(origen, destino, minuto):
                     candidatos.append({"troncal": troncal, "so": so, "sd": sd})
 
     if not candidatos:                           # REGLA 8
-        if not disponibles:
-            return None, (f"a las {hhmm(minuto)} no hay servicio: el sistema "
-                          "opera aprox. de 05:00 a 22:00 en día laboral.")
         return None, "no encontré conexión posible entre esos dos puntos a esa hora."
 
     # Numeros de cada candidato (para poder compararlos)
@@ -754,6 +759,10 @@ def pedir_hora():
             ahora = datetime.now()
             minuto = ahora.hour * 60 + ahora.minute
             print(f"   Usaré la hora actual: {hhmm(minuto)}")
+            if ahora.weekday() >= 5:
+                print("   Aviso: hoy es fin de semana y los horarios cargados son "
+                      "de día laboral;\n   el resultado puede no coincidir con "
+                      "el servicio real.")
             return minuto
         minuto = a_minutos(respuesta)
         if minuto is not None:

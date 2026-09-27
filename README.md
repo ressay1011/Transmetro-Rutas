@@ -21,8 +21,9 @@ masivo Transmetro, explicando el viaje paso a paso.
 1. REGLA 1: Si la ruta esta SUSPENDIDA -> no opera nunca.
 2. REGLA 2: Si la hora no cae en una franja de la ruta -> no opera ahora.
 3. REGLA 3: El bus solo avanza en SU sentido (solo paradas posteriores).
-4. REGLA 4: Si la ruta es EXPRESS -> se salta estaciones y en hora pico el
-   viaje resulta mas corto.
+4. REGLA 4: Si la ruta es EXPRESS -> se salta estaciones y no paga el costo
+   de detenerse en ellas, asi que el viaje resulta mas corto. Los expresos
+   solo operan en sus franjas (casi todas en hora pico).
 5. REGLA 5: Si el origen/destino elegido es una ESTACION -> se viaja por
    la red troncal.
 6. REGLA 6: Si es una ALIMENTADORA -> el primer y/o el ultimo tramo del
