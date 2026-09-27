@@ -2,6 +2,7 @@
 # SISTEMA INTELIGENTE DE RUTAS - TRANSMETRO BARRANQUILLA
 # ============================================================================
 
+import unicodedata
 from datetime import datetime   # solo para usar la hora actual si no se escribe
 
 # ---------------------------------------------------------------------------
@@ -279,17 +280,17 @@ ALIMENTADORAS = {
     "A2-1 Hipódromo": {
         "estado": "activa",
         "estaciones": ["joaquin_barrios"],
-        "barrios": ["Barrio Centro", "Calle de las Flores", "Ciudadela 20 de Julio", "El Carnero", "El Centenario", "El Hipódromo", "El Oriental", "El Pasito", "El Porvenir", "El Tucán", "La Arboleda", "La María", "Las Marinas", "Los Arrayanes", "San Antonio", "Simón Bolívar", "Urb"],
+        "barrios": ["Barrio Centro", "Calle de las Flores", "Ciudadela 20 de Julio", "El Carnero", "El Centenario", "El Hipódromo", "El Oriental", "El Pasito", "El Porvenir", "El Tucán", "La Arboleda", "La María", "Las Marinas", "Los Arrayanes", "San Antonio", "Simón Bolívar"],
     },
     "A3-1 Villa Katanga": {
         "estado": "activa",
         "estaciones": ["pedro_ramaya"],
-        "barrios": ["Costa de Oro", "El Éxito", "La Arboleda", "Las Trinitarias", "Muvdi", "Urb"],
+        "barrios": ["Costa de Oro", "El Éxito", "La Arboleda", "Las Trinitarias", "Muvdi"],
     },
     "A3-2 Soledad 2000": {
         "estado": "activa",
         "estaciones": ["portal_soledad"],
-        "barrios": ["Barrio Normandía", "Bella Murillo", "Ciudadela Metropolitana", "El Oasis", "La Fe", "La Ferruca", "La Inmaculada", "Los Cusules", "Nueva Jerusalén", "Nuevo Milenio", "Soledad Dos Mil", "Tajamar", "Tajamar II", "Urb"],
+        "barrios": ["Barrio Normandía", "Bella Murillo", "Ciudadela Metropolitana", "El Oasis", "La Fe", "La Ferruca", "La Inmaculada", "Los Cusules", "Nueva Jerusalén", "Nuevo Milenio", "Soledad Dos Mil", "Tajamar", "Tajamar II"],
     },
     "A3-3 Manuela Beltrán": {
         "estado": "activa",
@@ -299,7 +300,7 @@ ALIMENTADORAS = {
     "A3-4 Villa Sol": {
         "estado": "suspendida",
         "estaciones": ["portal_soledad"],
-        "barrios": ["Bella Jerusalén", "Ciudad Caribe", "Ciudad Transmetro", "La Candelaria", "La Candelaria II", "La Central", "Las Cometas", "Los Loteros", "Nuevo Milenio", "San Vicente", "Urb"],
+        "barrios": ["Bella Jerusalén", "Ciudad Caribe", "Ciudad Transmetro", "La Candelaria", "La Candelaria II", "La Central", "Las Cometas", "Los Loteros", "Nuevo Milenio", "San Vicente"],
     },
     "A5-1 Los Robles": {
         "estado": "activa",
@@ -309,22 +310,22 @@ ALIMENTADORAS = {
     "A5-2 Las Moras": {
         "estado": "activa",
         "estaciones": ["pacho_galan"],
-        "barrios": ["Altos de Sevilla", "Los Cedros", "Moras Norte", "Moras Occidente", "Urb"],
+        "barrios": ["Altos de Sevilla", "Los Cedros", "Moras Norte", "Moras Occidente"],
     },
     "A5-3 La Central": {
         "estado": "activa",
         "estaciones": ["portal_soledad"],
-        "barrios": ["Ciudad Caribe", "Ciudad Transmetro", "Don Bosco", "La Central", "Los Loteros", "Nuevo Milenio", "San Bernardo", "Urb"],
+        "barrios": ["Ciudad Caribe", "Ciudad Transmetro", "Don Bosco", "La Central", "Los Loteros", "Nuevo Milenio", "San Bernardo"],
     },
     "A5-4 San Antonio": {
         "estado": "activa",
         "estaciones": ["portal_soledad"],
-        "barrios": ["Ciudad Caribe", "Ciudad Salitre", "Ciudad Transmetro", "La Central", "Los Loteros", "Nuevo Milenio", "Urb"],
+        "barrios": ["Ciudad Caribe", "Ciudad Salitre", "Ciudad Transmetro", "La Central", "Los Loteros", "Nuevo Milenio"],
     },
     "A5-5 Manantial (opera con desvío)": {
         "estado": "activa",
         "estaciones": ["portal_soledad"],
-        "barrios": ["Ciudad Caribe", "Ciudad Transmetro", "El Manantial", "Nuevo Milenio", "Urb"],
+        "barrios": ["Ciudad Caribe", "Ciudad Transmetro", "El Manantial", "Nuevo Milenio"],
     },
     "A6-5 Carrizal": {
         "estado": "activa",
@@ -374,12 +375,12 @@ ALIMENTADORAS = {
     "Gran Malecón": {
         "estado": "suspendida temporalmente",
         "estaciones": [],
-        "barrios": ["Recorrido: América", "Bellavista", "Colombia", "El Prado", "La Concepción", "San Francisco", "Sector Industrial II - Vía 40"],
+        "barrios": ["América", "Bellavista", "Colombia", "El Prado", "La Concepción", "San Francisco", "Sector Industrial II - Vía 40"],
     },
     "U-30 Universidades (opera con desvío)": {
         "estado": "activa",
         "estaciones": ["joe_arroyo"],
-        "barrios": ["de Altamira", "América", "Buenavista", "Colombia", "El Poblado", "El Porvenir", "Granadillo", "La Campiña", "Miramar", "Paseo de la Castellana", "San Vicente", "Villa Santos", "Villa Campestre", "Ciudad Mallorquín"],
+        "barrios": ["Altamira", "América", "Buenavista", "Colombia", "El Poblado", "El Porvenir", "Granadillo", "La Campiña", "Miramar", "Paseo de la Castellana", "San Vicente", "Villa Santos", "Villa Campestre", "Ciudad Mallorquín"],
     },
     "A3-41 Villa Karla": {
         "estado": "activa",
@@ -394,7 +395,7 @@ ALIMENTADORAS = {
     "A9-4 Carrera 46 / fines de semana": {
         "estado": "activa",
         "estaciones": [],
-        "barrios": ["como Altamira", "América", "Buenavista", "Colombia", "El Poblado", "El Porvenir", "Granadillo", "La Campiña", "Miramar", "Paseo de la Castellana", "San Vicente", "Villa Santos", "Ciudad Mallorquín"],
+        "barrios": ["Altamira", "América", "Buenavista", "Colombia", "El Poblado", "El Porvenir", "Granadillo", "La Campiña", "Miramar", "Paseo de la Castellana", "San Vicente", "Villa Santos", "Ciudad Mallorquín"],
     },
     "Ruta Chévere": {
         "estado": "activa",
@@ -719,10 +720,32 @@ def construir_opciones():
 OPCIONES = construir_opciones()      # se arma una sola vez al iniciar
 
 
+def normalizar(texto):
+    """Pasa el texto a minúsculas y le quita las tildes para comparar."""
+    descompuesto = unicodedata.normalize("NFD", texto)
+    return "".join(c for c in descompuesto if unicodedata.category(c) != "Mn").lower()
+
+
+def buscar_opciones(texto):
+    """Devuelve los números del menú cuya estación, alimentadora o alguno
+    de sus barrios contiene el texto buscado (sin importar tildes)."""
+    buscado = normalizar(texto)
+    encontrados = []
+    for i, (_principal, _extra, punto) in enumerate(OPCIONES, start=1):
+        if punto[0] == "estacion":
+            textos = [punto[2]]
+        else:
+            textos = [punto[1]] + ALIMENTADORAS[punto[1]]["barrios"]
+        if any(buscado in normalizar(t) for t in textos):
+            encontrados.append(i)
+    return encontrados
+
+
 def mostrar_menu():
     """Muestra el menú numerado ('select'): estaciones y alimentadoras."""
     print("=" * 68)
     print("ELIGE EL ORIGEN Y EL DESTINO POR SU NÚMERO (0 para salir).")
+    print("También puedes escribir el nombre de un barrio o estación para buscarlo.")
     print()
     print("ESTACIONES DE LA RED TRONCAL:")
     for i, (principal, _extra, punto) in enumerate(OPCIONES, start=1):
@@ -740,6 +763,7 @@ def mostrar_menu():
 
 def pedir_seleccion(pregunta):
     """Pide una opción del menú por su número (0 = salir) y la valida.
+    Si se escribe texto, muestra las opciones que coinciden con él.
     Devuelve el punto elegido o la palabra 'salir'."""
     total = len(OPCIONES)
     while True:
@@ -748,6 +772,16 @@ def pedir_seleccion(pregunta):
             return "salir"
         if respuesta.isdigit() and 1 <= int(respuesta) <= total:
             return OPCIONES[int(respuesta) - 1][2]
+        if respuesta and not respuesta.isdigit():
+            encontrados = buscar_opciones(respuesta)
+            if encontrados:
+                print(f"   Opciones que coinciden con '{respuesta}':")
+                for i in encontrados:
+                    print(f"   {i:>2}. {OPCIONES[i - 1][0]}")
+                print("   Escribe el número de la opción que quieres.")
+            else:
+                print(f"   No encontré estaciones, alimentadoras ni barrios con '{respuesta}'.")
+            continue
         print(f"   Opción no válida: escribe un número entre 1 y {total} (o 0 para salir).")
 
 
