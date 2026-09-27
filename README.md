@@ -9,12 +9,27 @@ masivo Transmetro, explicando el viaje paso a paso.
 
 ## Como Se Usa:
 
-1. Guarda este archivo como transmetro.py y ejecutalo asi:
+Requiere Python 3.8 o superior; no usa librerias externas.
+
+1. Clona el repositorio y ejecuta el programa:
+   git clone https://github.com/ressay1011/Transmetro-Rutas.git
+   cd Transmetro-Rutas
    python transmetro.py
 2. Elige el ORIGEN y el DESTINO por su NUMERO en el menu (estaciones de
-   la troncal y rutas alimentadoras) y despues la hora en formato HH:MM
-   (si presionas Enter se usa la hora actual).
-3. Escribe 0 para terminar.
+   la troncal y rutas alimentadoras). Tambien puedes escribir el nombre
+   de un barrio o estacion (por ejemplo "miramar") y el programa muestra
+   las opciones que coinciden, sin importar tildes ni mayusculas.
+3. Escribe la hora en formato HH:MM (tambien se acepta 7, 7.30 o 0730);
+   si presionas Enter se usa la hora actual.
+4. Escribe 0 para terminar.
+
+## Pruebas:
+
+   python -m unittest -v
+
+Verifican la conversion de horas, la disponibilidad de las rutas, la
+consistencia de los datos, la eleccion de la mejor ruta y la busqueda
+por barrio.
 
 ## Reglas Condicionales Que Aplica El Programa:
 
